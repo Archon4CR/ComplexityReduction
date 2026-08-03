@@ -65,10 +65,4 @@ theorem reduceViaEncodingBridge {A B C : EncodedDecisionProblem}
     TMPolyReducible A C :=
   TMPolyReducible.trans encode.toTMPolyReducible hard
 
-#check TMKarpReduction.toTMPolyReducible
-#check composeTMKarp
-#check liftNPCompleteAlongReduction
-#check transferTMNPComplete
-#check reduceViaEncodingBridge
-
 end ComplexityReduction
