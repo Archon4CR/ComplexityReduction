@@ -1,0 +1,16 @@
+import ComplexityReduction.Karp21.Knapsack.StructuredTM.Assembly
+import ComplexityReduction.Karp21.Knapsack.StructuredTM.BinaryCompareTM
+import ComplexityReduction.Karp21.Knapsack.StructuredTM.BinaryLogic
+import ComplexityReduction.Karp21.Knapsack.StructuredTM.BinaryMul
+import ComplexityReduction.Karp21.Knapsack.StructuredTM.BinarySub
+import ComplexityReduction.Karp21.Knapsack.StructuredTM.BinarySubTM
+import ComplexityReduction.Karp21.Knapsack.StructuredTM.ConstraintBound
+import ComplexityReduction.Karp21.Knapsack.StructuredTM.DigitCode
+import ComplexityReduction.Karp21.Knapsack.StructuredTM.DigitCodeList
+import ComplexityReduction.Karp21.Knapsack.StructuredTM.ListNat
+import ComplexityReduction.Karp21.Knapsack.StructuredTM.ListLength
+import ComplexityReduction.Karp21.Knapsack.StructuredTM.RowNegativeShift
+import ComplexityReduction.Karp21.Knapsack.StructuredTM.RowLookup
+import ComplexityReduction.Karp21.Knapsack.StructuredTM.SignedParts
+import ComplexityReduction.Karp21.Knapsack.StructuredTM.SlackPowers
+import ComplexityReduction.Karp21.Knapsack.StructuredTM.TargetDigits

@@ -1,0 +1,14 @@
+name = "ComplexityReduction"
+version = "0.1.0"
+defaultTargets = ["complexityreduction"]
+
+[[lean_lib]]
+name = "ComplexityReduction"
+
+[[lean_exe]]
+name = "complexityreduction"
+root = "Main"
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
