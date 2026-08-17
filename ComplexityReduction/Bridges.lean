@@ -1,14 +1,60 @@
-/-
-Copyright (c) 2026. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
--/
+-- Aggregation module for ComplexityReduction.Bridges
+-- Auto-generated: imports all submodules.
 
-import ComplexityReduction.Bridges.TMPolyTime
-import ComplexityReduction.Bridges.TMComplexityClasses
 import ComplexityReduction.Bridges.CostedTMSound
 import ComplexityReduction.Bridges.CostedToTM
-import ComplexityReduction.Bridges.TMComplexityTransport
+import ComplexityReduction.Bridges.CostedToTM.Maps
+import ComplexityReduction.Bridges.CostedToTM.Maps.BoolDispatch
+import ComplexityReduction.Bridges.CostedToTM.Maps.InvariantFold
+import ComplexityReduction.Bridges.CostedToTM.Maps.Part1
+import ComplexityReduction.Bridges.CostedToTM.Maps.Part2
+import ComplexityReduction.Bridges.CostedToTM.Maps.Sum
+import ComplexityReduction.Bridges.CostedToTM.Maps.SymbolList
+import ComplexityReduction.Bridges.CostedToTM.NatArithmetic
+import ComplexityReduction.Bridges.CostedToTM.NatMul
+import ComplexityReduction.Bridges.CostedToTM.NatPair
+import ComplexityReduction.Bridges.CostedToTM.NatRange
+import ComplexityReduction.Bridges.CostedToTM.Programs
+import ComplexityReduction.Bridges.CostedToTM.Programs.Base
+import ComplexityReduction.Bridges.CostedToTM.Programs.FiniteLookup
+import ComplexityReduction.Bridges.CostedToTM.Programs.ListFold
+import ComplexityReduction.Bridges.CostedToTM.Programs.ListFold.Part1
+import ComplexityReduction.Bridges.CostedToTM.Programs.ListFold.Part2
+import ComplexityReduction.Bridges.CostedToTM.Programs.ListFold.Part3
+import ComplexityReduction.Bridges.CostedToTM.Programs.ListMap
+import ComplexityReduction.Bridges.CostedToTM.Programs.ListMap.Part1
+import ComplexityReduction.Bridges.CostedToTM.Programs.ListMap.Part2
+import ComplexityReduction.Bridges.CostedToTM.Programs.ListMap.Part3
+import ComplexityReduction.Bridges.CostedToTM.Programs.NatSub
+import ComplexityReduction.Bridges.CostedToTM.Programs.PrefixSuffix
+import ComplexityReduction.Bridges.CostedToTM.Programs.PrefixSuffix.Part1
+import ComplexityReduction.Bridges.CostedToTM.Programs.PrefixSuffix.Part2
+import ComplexityReduction.Bridges.CostedToTM.Programs.PrefixSuffix.Part3
+import ComplexityReduction.Bridges.CostedToTM.Programs.ProductAndListPrimitives
+import ComplexityReduction.Bridges.CostedToTM.Programs.ProductAndListPrimitives.Part1
+import ComplexityReduction.Bridges.CostedToTM.Programs.ProductAndListPrimitives.Part2
+import ComplexityReduction.Bridges.CostedToTM.Programs.ProductAndListPrimitives.Part3
+import ComplexityReduction.Bridges.CostedToTM.Programs.ProductPairing
+import ComplexityReduction.Bridges.CostedToTM.Programs.ProductPairing.Part1
+import ComplexityReduction.Bridges.CostedToTM.Programs.ProductPairing.Part2
+import ComplexityReduction.Bridges.CostedToTM.Programs.ProductSupport
+import ComplexityReduction.Bridges.CostedToTM.Programs.ProductSupport.Part1
+import ComplexityReduction.Bridges.CostedToTM.Programs.ProductSupport.Part2
+import ComplexityReduction.Bridges.CostedToTM.Programs.RawBlockMap
+import ComplexityReduction.Bridges.CostedToTM.Programs.RawToEncodedList
+import ComplexityReduction.Bridges.CostedToTM.Programs.SeqComp
+import ComplexityReduction.Bridges.CostedToTM.Programs.SeqComp.Part1
+import ComplexityReduction.Bridges.CostedToTM.Programs.SeqComp.Part2
+import ComplexityReduction.Bridges.CostedToTM.Programs.TaggedDispatch.Part1
+import ComplexityReduction.Bridges.CostedToTM.Programs.TaggedDispatch.Part2
+import ComplexityReduction.Bridges.CostedToTM.Programs.TaggedDispatch.Part3
+import ComplexityReduction.Bridges.CostedToTM.Programs.TaggedDispatch.Part4
+import ComplexityReduction.Bridges.CostedToTM.Status
 import ComplexityReduction.Bridges.LogSpaceTMSound
 import ComplexityReduction.Bridges.StrictLogSpaceMachine
 import ComplexityReduction.Bridges.StrictLogSpaceTMSound
+import ComplexityReduction.Bridges.TMComplexityClasses
+import ComplexityReduction.Bridges.TMComplexityTransport
+import ComplexityReduction.Bridges.TMEncodingDiscipline
 import ComplexityReduction.Bridges.TMEncodingDisciplineTemplates
+import ComplexityReduction.Bridges.TMPolyTime

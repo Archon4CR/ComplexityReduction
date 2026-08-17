@@ -1,23 +1,35 @@
-/-
-Copyright (c) 2026.
-Released under Apache 2.0 license as described in the file LICENSE.
--/
+-- Aggregation module for ComplexityReduction.Schaefer
+-- Auto-generated: imports all submodules.
 
-import ComplexityReduction.Schaefer.Relations
-import ComplexityReduction.Schaefer.Problem
+import ComplexityReduction.Schaefer.Dichotomy
 import ComplexityReduction.Schaefer.DichotomyStatement
-import ComplexityReduction.Schaefer.Tractable
-import ComplexityReduction.Schaefer.Tractable.Horn
-import ComplexityReduction.Schaefer.Tractable.FiniteSearch
-import ComplexityReduction.Schaefer.Tractable.Bijunctive
-import ComplexityReduction.Schaefer.Tractable.Affine
-import ComplexityReduction.Schaefer.Hardness.Representation
+import ComplexityReduction.Schaefer.EmptyRelations
+import ComplexityReduction.Schaefer.GeneratedCertificates
 import ComplexityReduction.Schaefer.Hardness.Classification
 import ComplexityReduction.Schaefer.Hardness.Constants
-import ComplexityReduction.Schaefer.EmptyRelations
-import ComplexityReduction.Schaefer.Dichotomy
-import ComplexityReduction.Schaefer.GeneratedCertificates
-
-/-!
-Top-level import for the local Schaefer formalization.
--/
+import ComplexityReduction.Schaefer.Hardness.Constants.Part1
+import ComplexityReduction.Schaefer.Hardness.Constants.Part2
+import ComplexityReduction.Schaefer.Hardness.Constants.Part3
+import ComplexityReduction.Schaefer.Hardness.Constants.Part4
+import ComplexityReduction.Schaefer.Hardness.LocalRep.Classification.AffineChar
+import ComplexityReduction.Schaefer.Hardness.LocalRep.Classification.BijunctiveChar
+import ComplexityReduction.Schaefer.Hardness.LocalRep.Classification.RepBinaryRels
+import ComplexityReduction.Schaefer.Hardness.LocalRep.Classification.RepContainsNeq
+import ComplexityReduction.Schaefer.Hardness.LocalRep.Classification.RepExactlyOne
+import ComplexityReduction.Schaefer.Hardness.LocalRep.Classification.WeakChar
+import ComplexityReduction.Schaefer.Hardness.LocalRep.Closure.Complementive
+import ComplexityReduction.Schaefer.Hardness.LocalRep.Closure.Operations
+import ComplexityReduction.Schaefer.Hardness.LocalRep.Closure.Rep
+import ComplexityReduction.Schaefer.Hardness.LocalRep.SAT.LogicalRelation
+import ComplexityReduction.Schaefer.Hardness.Representation
+import ComplexityReduction.Schaefer.Hardness.Representation.Part1
+import ComplexityReduction.Schaefer.Hardness.Representation.Part2
+import ComplexityReduction.Schaefer.Problem
+import ComplexityReduction.Schaefer.Relations
+import ComplexityReduction.Schaefer.Tractable
+import ComplexityReduction.Schaefer.Tractable.Affine
+import ComplexityReduction.Schaefer.Tractable.Bijunctive
+import ComplexityReduction.Schaefer.Tractable.FiniteSearch
+import ComplexityReduction.Schaefer.Tractable.Horn
+import ComplexityReduction.Schaefer.Tractable.Horn.Part1
+import ComplexityReduction.Schaefer.Tractable.Horn.Part2
