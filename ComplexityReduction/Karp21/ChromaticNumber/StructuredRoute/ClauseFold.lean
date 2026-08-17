@@ -658,6 +658,48 @@ theorem clauseEdgesFromFromInstructions_inputSize_le
   have hOut := clauseEdgesFromAcc_edges_inputSize_le acc
   simpa [clauseEdgesFromFromInstructions, acc, N] using hOut.trans hAccSize
 
+set_option maxRecDepth 1000000 in
+private theorem cube_bound (N : ℕ) :
+    (6 * N + 10) ^ 3 ≤ 5000 * N ^ 3 + 5000 := by
+  by_cases hZero : N = 0
+  · have h6N10 : 6 * N + 10 = 10 := by omega
+    have hN3 : N ^ 3 = 0 := by rw [hZero]; rfl
+    rw [h6N10, hN3, Nat.mul_zero, Nat.zero_add]
+    have h10cubed : (10 : ℕ) ^ 3 = 1000 := by
+      rw [Nat.pow_succ, Nat.pow_succ, Nat.pow_succ, Nat.pow_zero, Nat.one_mul]
+    rw [h10cubed]
+    omega
+  · have hPos : 1 ≤ N := Nat.succ_le_of_lt (Nat.pos_of_ne_zero hZero)
+    have hLin : 6 * N + 10 ≤ 16 * N := by omega
+    have hPow16 : (6 * N + 10) ^ 3 ≤ (16 * N) ^ 3 := Nat.pow_le_pow_left hLin 3
+    have hEq16 : (16 * N) ^ 3 = 4096 * N ^ 3 := by rw [Nat.mul_pow]
+    have hLe5k : 4096 * N ^ 3 ≤ 5000 * N ^ 3 + 5000 := by
+      apply Nat.le_trans
+      · exact Nat.mul_le_mul_right (N ^ 3) (by omega : (4096 : ℕ) ≤ 5000)
+      · exact Nat.le_add_right _ 5000
+    exact hPow16.trans (hEq16.trans_le hLe5k)
+
+private theorem mid_bound (N : ℕ) :
+    30000 * (5000 * N ^ 3 + 5000) + 30000 ≤
+      1000000000 * N ^ 3 + 1000000000 := by
+  set K := N ^ 3
+  omega
+
+private theorem raw_bound (M N : ℕ) (hM : M ≤ 6 * N + 10) :
+    30000 * M ^ 3 + 30000 ≤ 1000000000 * N ^ 3 + 1000000000 := by
+  have hPow : M ^ 3 ≤ (6 * N + 10) ^ 3 := Nat.pow_le_pow_left hM 3
+  have hCube : (6 * N + 10) ^ 3 ≤ 5000 * N ^ 3 + 5000 := cube_bound N
+  have hMC : M ^ 3 ≤ 5000 * N ^ 3 + 5000 := hPow.trans hCube
+  have h30k : 30000 * M ^ 3 ≤ 30000 * (5000 * N ^ 3 + 5000) :=
+    Nat.mul_le_mul_left 30000 hMC
+  have h30kAdd :
+      30000 * M ^ 3 + 30000 ≤ 30000 * (5000 * N ^ 3 + 5000) + 30000 :=
+    Nat.add_le_add_right h30k 30000
+  exact h30kAdd.trans (mid_bound N)
+
+private theorem mul_mul_mul_eq_pow (M : ℕ) : M * M * M = M ^ 3 := by
+  rw [Nat.pow_succ, Nat.pow_succ, Nat.pow_succ, Nat.pow_zero, Nat.one_mul]
+
 theorem clauseEdgesFromFromInput_structured_inputSize_le (p : ClauseEdgesFromInput) :
     edgeListStructuredEncodedType.inputSize (clauseEdgesFromFromInput p) ≤
       1000000000 * clauseEdgesFromInputEncodedType.inputSize p ^ 3 + 1000000000 := by
@@ -666,38 +708,27 @@ theorem clauseEdgesFromFromInput_structured_inputSize_le (p : ClauseEdgesFromInp
   let M := clauseEdgesFromInstructionListEncodedType.inputSize xs
   have hRunner := clauseEdgesFromFromInstructions_inputSize_le xs
   have hM : M ≤ 6 * N + 10 := by
-    simpa [M, N, xs] using clauseEdgesFromInstructions_inputSize_le p
-  have hPow : M ^ 3 ≤ (6 * N + 10) ^ 3 :=
-    Nat.pow_le_pow_left hM 3
+    show clauseEdgesFromInstructionListEncodedType.inputSize (clauseEdgesFromInstructions p) ≤
+         6 * clauseEdgesFromInputEncodedType.inputSize p + 10
+    exact clauseEdgesFromInstructions_inputSize_le p
+  have hRaw := raw_bound M N hM
   have hEval :
-      clauseEdgesFromFoldAccBoundPolynomial.eval M ≤
-        1000000000 * N ^ 3 + 1000000000 := by
-    have hCube :
-        (6 * N + 10) ^ 3 ≤ 5000 * N ^ 3 + 5000 := by
-      by_cases hZero : N = 0
-      · simp [hZero]
-      · have hPos : 1 ≤ N := Nat.succ_le_of_lt (Nat.pos_of_ne_zero hZero)
-        have hLin : 6 * N + 10 ≤ 16 * N := by
-          nlinarith
-        have hPow16 : (6 * N + 10) ^ 3 ≤ (16 * N) ^ 3 :=
-          Nat.pow_le_pow_left hLin 3
-        calc
-          (6 * N + 10) ^ 3 ≤ (16 * N) ^ 3 := hPow16
-          _ = 4096 * N ^ 3 := by ring
-          _ ≤ 5000 * N ^ 3 + 5000 := by nlinarith
-    have hRaw :
-        30000 * M ^ 3 + 30000 ≤
-          1000000000 * N ^ 3 + 1000000000 := by
-      nlinarith [hPow, hCube]
-    simpa [clauseEdgesFromFoldAccBoundPolynomial_eval, pow_succ, pow_two,
-      Nat.mul_assoc] using hRaw
+    clauseEdgesFromFoldAccBoundPolynomial.eval M ≤
+      1000000000 * N ^ 3 + 1000000000 := by
+    have hEqM3 : M * M * M = M ^ 3 := mul_mul_mul_eq_pow M
+    have hRaw' : 30000 * (M * M * M) + 30000 ≤ 1000000000 * N ^ 3 + 1000000000 := by
+      rw [hEqM3]; exact hRaw
+    exact (clauseEdgesFromFoldAccBoundPolynomial_eval M).le.trans hRaw'
   calc
     edgeListStructuredEncodedType.inputSize (clauseEdgesFromFromInput p)
         =
       edgeListStructuredEncodedType.inputSize (clauseEdgesFromRunner p) := by
         rw [clauseEdgesFromRunner_eq_clauseEdgesFrom]
     _ ≤ clauseEdgesFromFoldAccBoundPolynomial.eval M := by
-        simpa [clauseEdgesFromRunner, xs, M] using hRunner
+        show edgeListStructuredEncodedType.inputSize (clauseEdgesFromFromInstructions xs) ≤
+             clauseEdgesFromFoldAccBoundPolynomial.eval
+               (clauseEdgesFromInstructionListEncodedType.inputSize xs)
+        exact hRunner
     _ ≤ 1000000000 * N ^ 3 + 1000000000 := hEval
 
 noncomputable def clauseEdgesFromFoldTimePolynomial
